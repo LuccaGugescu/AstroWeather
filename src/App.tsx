@@ -30,17 +30,17 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import { useEffect } from 'react';
 import Vr from './pages/Vr';
 import Sun from './pages/Sun';
 import Aurora from './pages/Aurora';
+import { useEffect } from 'react';
 
 setupIonicReact();
 
 const App: React.FC = () => {
     useEffect(() => {
-        document.body.classList.toggle('dark');
-    }, [])
+        document.body.classList.toggle('dark', true);
+    }, []);
 
     return (
         <IonApp>
