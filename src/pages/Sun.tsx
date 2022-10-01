@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonMenu, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import { useEffect, useRef, useState } from 'react';
 import './Sun.css';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -11,6 +11,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { textureList } from "../constants/index";
+import { chevronBackOutline, chevronForwardOutline } from 'ionicons/icons';
 const Sun: React.FC = () => {
     const [texture, setTexture] = useState("https://sdo.gsfc.nasa.gov/assets/img/latest/mpeg/latest_1024_0193.mp4");
     const [present, dismiss] = useIonLoading();
@@ -38,78 +39,102 @@ const Sun: React.FC = () => {
 
 
     return (
-        <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonTitle>Sun</IonTitle>
-                </IonToolbar>
-            </IonHeader>
-            <IonContent fullscreen>
-                <IonHeader collapse="condense">
+        <>
+            <IonPage id="main-content">
+                <IonHeader>
                     <IonToolbar>
-                        <IonTitle size="large">Sun</IonTitle>
+                        <IonButtons slot="start">
+                            <IonMenuButton></IonMenuButton>
+                        </IonButtons>
+                        <IonTitle>Sun</IonTitle>
                     </IonToolbar>
                 </IonHeader>
-                <Swiper
-                    style={{ padding: "0px 50px 0px 50px", margin: "30px 0px 60px 0px" }}
-                    // install Swiper modules
-                    modules={[Navigation, Pagination, Scrollbar, A11y]}
-                    spaceBetween={10}
-                    slidesPerView={2}
-                    navigation={true}
-                    breakpoints={{
-                        // when window width is >= 480px
-                        480: {
-                            slidesPerView: 3,
-                            spaceBetween: 20,
-                        },
-                        // when window width is >= 640px
-                        640: {
-                            slidesPerView: 3,
-                            spaceBetween: 40
-                        },
-                        820: {
-                            slidesPerView: 5,
-                            spaceBetween: 40,
-                            navigation: {
-                                enabled: true
-                            }
-                            
-                        },
-                        1100: {
-                            slidesPerView: 7,
-                            spaceBetween: 40
-                        },
-                        1400: {
-                            slidesPerView: 9,
-                            spaceBetween: 40
-                        },
-                    }
-                    }
+                <IonContent fullscreen>
+                    <IonHeader collapse="condense">
+                        <IonToolbar>
+                            <IonTitle size="large">Sun</IonTitle>
+                        </IonToolbar>
+                    </IonHeader>
+                    <Swiper
+                        style={{ padding: "0px 50px 0px 50px", margin: "30px 0px 60px 0px" }}
+                        // install Swiper modules
+                        modules={[Navigation]}
+                        spaceBetween={10}
+                        slidesPerView={2}
+                        navigation
+                        breakpoints={{
+                            // when window width is >= 480px
+                            0: {
+                                navigation: {
+                                    enabled: false
+                                }
+                            },
+                            480: {
+                                slidesPerView: 3,
+                                spaceBetween: 20,
+                                navigation: {
+                                    enabled: false
+                                }
+                            },
+                            // when window width is >= 640px
+                            640: {
+                                slidesPerView: 3,
+                                spaceBetween: 40,
+                                navigation: {
+                                    enabled: false
+                                }
+                            },
+                            820: {
+                                slidesPerView: 5,
+                                spaceBetween: 40,
+                                navigation: {
+                                    enabled: true
+                                }
 
-                >
-                    {
-                        textureList.map(({ image, name, link }) => {
-                            return (
-                                <SwiperSlide key={name}>
-                                    <SunTexture image={image} name={name} link={link} setTexture={setTexture} present={present} selectedLink={texture} />
-                                </SwiperSlide>
+                            },
+                            1100: {
+                                slidesPerView: 7,
+                                spaceBetween: 40,
+                                navigation: {
+                                    enabled: true,
+                                    
+                                }
+                            },
+                            1400: {
+                                slidesPerView: 9,
+                                spaceBetween: 40,
+                                navigation: {
+                                    enabled: true
+                                }
+                            },
+                        }
+                        }
+
+                    >
+                       
+                        {
+                            textureList.map(({ image, name, link }) => {
+                                return (
+                                    <SwiperSlide key={name}>
+                                        <SunTexture image={image} name={name} link={link} setTexture={setTexture} present={present} selectedLink={texture} />
+                                    </SwiperSlide>
+                                )
+                            })
+                        }
+                    </Swiper>
+                    <IonRow className="ion-justify-content-center">
+                        {
+                            isLoading === false && (
+                                <video ref={videoRef} autoPlay style={{ width: "100%", maxWidth: "800px" }} key={texture}>
+                                    <source src={texture} type="video/mp4" />
+                                </video>
                             )
-                        })
-                    }
-                </Swiper>
-                <IonRow className="ion-justify-content-center">
-                    {
-                        isLoading === false && (
-                            <video ref={videoRef} autoPlay style={{ width: "100%", maxWidth: "800px" }} key={texture}>
-                                <source src={texture} type="video/mp4" />
-                            </video>
-                        )
-                    }
-                </IonRow>
+                        }
+                    </IonRow>
 
-            </IonContent>
-        </IonPage >
+                </IonContent>
+            </IonPage>
+        </>
     );
 };
 

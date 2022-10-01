@@ -48,6 +48,7 @@ const App: React.FC = () => {
                 <IonTabs>
                     <IonRouterOutlet>
                         <Route exact path="/sun">
+
                             <Sun />
                         </Route>
                         <Route exact path="/vr">
@@ -60,7 +61,8 @@ const App: React.FC = () => {
                             <Redirect to="/sun" />
                         </Route>
                     </IonRouterOutlet>
-                    <IonTabBar slot="bottom">
+                    <IonTabBar slot="bottom" className="ion-hide-md-up">
+
                         <IonTabButton tab="vr" href="/vr">
                             <IonIcon icon={planet} />
                             <IonLabel>VR</IonLabel>
