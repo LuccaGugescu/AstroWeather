@@ -10,10 +10,7 @@ import {
     setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { planet, sparkles, triangle, sunny } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import { planet, sparkles, sunny } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -34,6 +31,9 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import { useEffect } from 'react';
+import Vr from './pages/Vr';
+import Sun from './pages/Sun';
+import Aurora from './pages/Aurora';
 
 setupIonicReact();
 
@@ -47,29 +47,29 @@ const App: React.FC = () => {
             <IonReactRouter>
                 <IonTabs>
                     <IonRouterOutlet>
-                        <Route exact path="/tab1">
-                            <Tab1 />
+                        <Route exact path="/sun">
+                            <Sun />
                         </Route>
-                        <Route exact path="/tab2">
-                            <Tab2 />
+                        <Route exact path="/vr">
+                            <Vr />
                         </Route>
-                        <Route path="/tab3">
-                            <Tab3 />
+                        <Route path="/aurora">
+                            <Aurora />
                         </Route>
                         <Route exact path="/">
-                            <Redirect to="/tab1" />
+                            <Redirect to="/sun" />
                         </Route>
                     </IonRouterOutlet>
                     <IonTabBar slot="bottom">
-                        <IonTabButton tab="tab1" href="/tab1">
+                        <IonTabButton tab="vr" href="/vr">
                             <IonIcon icon={planet} />
                             <IonLabel>VR</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="tab2" href="/tab2">
+                        <IonTabButton tab="sun" href="/sun">
                             <IonIcon icon={sunny} />
                             <IonLabel>Sun</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="tab3" href="/tab3">
+                        <IonTabButton tab="aurora" href="/aurora">
                             <IonIcon icon={sparkles} />
                             <IonLabel>Aurora</IonLabel>
                         </IonTabButton>
