@@ -200,22 +200,26 @@ export const SOLAR_WIND_DATA = [
     {
         iconName: "density.png",
         name: "Density",
-        id: 4
+        id: 4,
+        unity: "g/cm**3"
     },
     {
         iconName: "wind.png",
         name: "Speed",
-        id: 5
+        id: 5,
+        unity: "km/h"
     },
     {
         iconName: "temperature.png",
         name: "Temperature",
-        id: 6
+        id: 6,
+        unity: "K"
     },
     {
         iconName: "phi.png",
         name: "Phi",
-        id: 7
+        id: 7,
+        unity: "deg"
     }
 ]
 

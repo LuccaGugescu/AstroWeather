@@ -253,7 +253,7 @@ const Sun: React.FC = () => {
                                 {
                                     textureList.map(({ image, name, link }) => {
                                         return (
-                                            <SwiperSlide key={name}>
+                                            <SwiperSlide key={name} >
                                                 <SunTexture image={image} name={name} link={link} setTexture={setTexture} selectedLink={texture} setDescription={setDescription} />
                                             </SwiperSlide>
                                         )
@@ -285,7 +285,7 @@ const Sun: React.FC = () => {
                                 <IonRow> {
                                     SUN_DATA.map(({ iconName, name, value, id }) => {
                                         return (
-                                            <IonCol col-6 col-sm><DataCard setDataDescription={setDataDescription} id={id} iconName={iconName} name={name} value={value} setIsOpen={setIsOpen} /></IonCol>
+                                            <IonCol col-6 col-sm key={id }><DataCard setDataDescription={setDataDescription} id={id} iconName={iconName} name={name} value={value} setIsOpen={setIsOpen} /></IonCol>
                                         )
                                     })
                                 }
@@ -299,9 +299,10 @@ const Sun: React.FC = () => {
                             <IonGrid className="grid-ion">
                                 <IonRow>
                                     {
-                                        SOLAR_WIND_DATA.map(({ iconName, name, id }) => {
+                            SOLAR_WIND_DATA.map(({ iconName, name, id, unity }) => {
+                
                                             return !isLoadingPlasma ? (
-                                                <IonCol col-6 col-sm><DataCard setDataDescription={setDataDescription} id={id} iconName={iconName} name={name} setIsOpen={setIsOpen} value={plasmaData} key={name} /></IonCol>
+                                                <IonCol col-6 col-sm key={id }><DataCard unity={unity}  setDataDescription={setDataDescription} id={id} iconName={iconName} name={name} setIsOpen={setIsOpen} value={plasmaData} key={name} /></IonCol>
                                             ) :
                                                 (
                                                     <IonSkeletonText style={{ marginTop: 20, marginBottom: 20, width: "100%", maxWidth: 300, height: 300 }} animated={true}></IonSkeletonText>
@@ -438,7 +439,7 @@ const Sun: React.FC = () => {
                             <IonRow> {
                                 SUN_DATA.map(({ iconName, name, value, id }) => {
                                     return (
-                                        <IonCol col-6 col-sm><DataCard setDataDescription={setDataDescription} id={id} iconName={iconName} name={name} value={value} setIsOpen={setIsOpen} /></IonCol>
+                                        <IonCol col-6 col-sm key={id }><DataCard setDataDescription={setDataDescription} id={id} iconName={iconName} name={name} value={value} setIsOpen={setIsOpen} /></IonCol>
                                     )
                                 })
                             }
@@ -454,7 +455,7 @@ const Sun: React.FC = () => {
                                 {
                                     SOLAR_WIND_DATA.map(({ iconName, name, id }) => {
                                         return !isLoadingPlasma ? (
-                                            <IonCol col-6 col-sm><DataCard setDataDescription={setDataDescription} id={id} iconName={iconName} name={name} setIsOpen={setIsOpen} value={plasmaData} key={name} /></IonCol>
+                                            <IonCol col-6 col-sm key={id }><DataCard setDataDescription={setDataDescription} id={id} iconName={iconName} name={name} setIsOpen={setIsOpen} value={plasmaData} key={name} /></IonCol>
                                         ) :
                                             (
                                                 <IonSkeletonText style={{ marginTop: 20, marginBottom: 20, width: "100%", maxWidth: 300, height: 300 }} animated={true}></IonSkeletonText>
