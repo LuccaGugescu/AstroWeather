@@ -158,7 +158,7 @@ const Sun: React.FC = () => {
                                                 <source src={texture} type="video/mp4" />
                                             </video>
                                             <InfoButton />
-                                            <FreqDescription />
+                                            {/*<FreqDescription />*/}
                                         </div>
                                     ) :
                                         (
