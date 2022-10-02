@@ -10,14 +10,14 @@ interface IFreqDescription {
     height: number;
     image: string;
 }
-function FreqDescription({ title, waveLight, object, temperature, color, image }: IFreqDescription) {
+function FreqDescription({ title, waveLight, object, temperature, color, image, height }: IFreqDescription) {
     return (
         <IonModal id="example-modal" trigger="open-custom-dialog">
             <div className="wrapper">
                 <h1 className="modal-title">{title}</h1>
                 <p className="modal-text">This star has a Wavelight of {waveLight} A (angstroms). If you multiply it times 1 million you will get a <span style={{ fontFamily: 'Verdana', fontWeight: 900, fontSize: 15 }}>{object}</span>:</p>
                 <div className="modal-banner">
-                    <p className="modal-text" style={{ marginRight: 10 }}>0.94 cm</p>
+                    <p className="modal-text" style={{ marginRight: 10 }}>{height} cm</p>
                     <img src="/assets/icon/height.png" width={15} />
                     <img src={"/assets/icon/" + image} width={50} />
                 </div>

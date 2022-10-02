@@ -1,3 +1,4 @@
+import { findModalBasedOnTexture } from "../constants";
 import "./SunTexture.css";
 
 interface ISunTexture {
@@ -6,12 +7,15 @@ interface ISunTexture {
     link: string;
     selectedLink: string;
     setTexture: (link: string) => void;
+    setDescription: (data: any) => void;
 }
 
-function SunTexture({ image, name, link, setTexture, selectedLink }: ISunTexture) {
+function SunTexture({ image, name, link, setTexture, selectedLink, setDescription }: ISunTexture) {
     return (
         <div className={"sunContainer"} onClick={() => {
-            setTexture(link)
+            setTexture(link);
+            setDescription(findModalBasedOnTexture(name));
+
         }}>
             <img className={"texture " + (selectedLink === link ? "selected" : "")} src={"/assets/texture/" + image} alt="image of the sun with different frequency" />
             <p className="sunText">{name}</p>
