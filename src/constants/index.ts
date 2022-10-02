@@ -58,22 +58,26 @@ export const SUN_DATA = [
     {
         iconName: "clock.png",
         name: "Age",
-        value: "~4.5 billion years"
+        value: "~4.5 billion years",
+        id: 0
     },
     {
         iconName: "Radius.png",
         name: "Radius",
-        value: "~696,340 km"
+        value: "~696,340 km",
+        id: 1
     },
     {
         iconName: "gravity.png",
         name: "Gravity",
-        value: "274 m/s"
+        value: "274 m/s",
+        id: 2
     },
     {
         iconName: "star-type.png",
         name: "Star Type",
-        value: "Yellow Dwarf"
+        value: "Yellow Dwarf",
+        id: 3
     }
 
 ]
@@ -195,18 +199,72 @@ export function findModalBasedOnTexture(name: string) {
 export const SOLAR_WIND_DATA = [
     {
         iconName: "density.png",
-        name: "Density"
+        name: "Density",
+        id: 4
     },
     {
         iconName: "wind.png",
-        name: "Speed"
+        name: "Speed",
+        id: 5
     },
     {
         iconName: "temperature.png",
-        name: "Temperature"
+        name: "Temperature",
+        id: 6
     },
     {
         iconName: "phi.png",
-        name: "Phi"
+        name: "Phi",
+        id: 7
     }
+]
+
+
+export const SOLAR_DATA_DESCRIPTION_MODAL = [
+    {
+        id: 0,
+        name: "Age",
+        description: "age since the star exists"
+    },
+    {
+        id: 1,
+        name: "Radius",
+        description: "Radius of a circle is the distance from the center of the circle to any point on it's circumference."
+    },
+    {
+        id: 2,
+        name: "Gravity",
+        description: "Gravity is the force by which a planet or other body draws objects toward its center. The force of gravity keeps all of the planets in orbit around the sun."
+    },
+    {
+        id: 3,
+        name: "Star Type",
+        description: "Star type is a description used to classify a star based on size and wavelength"
+    },
+    {
+        id: 4,
+        name: "Density",
+        description: "Density, is the substance's mass per unit of volume. "
+    },
+    {
+        id: 5,
+        name: "Speed",
+        description: "The solar wind is a stream of charged particles released from the upper atmosphere of the Sun, called the corona.the solar wind reaches speeds between 250 and 750 km / s and is supersonic, meaning it moves faster than the speed of the fast magnetosonic wave."
+    },
+    {
+        id: 6,
+        name: "Temperature",
+        description: "Temperature is a physical quantity that expresses the hotness of matter or radiation."
+    },
+    {
+        id: 7,
+        name: "Magnetic field polar angle(Phi) ",
+        description: "It shows the increase of the transport of solar winds & mass into the Earth's magnetosphere [Phi in the negative = higher connection Phi into the positive = less connection]"
+    },
+    {
+        id: 8,
+        name: "Strenght of the magnetic field(BZ)",
+        description: "Bz refers to the intensity of the magnetic field in the north-south direction  (Z axis)"
+    }
+
 ]

@@ -1,24 +1,7 @@
 import { IonCard, IonCardContent, IonCardTitle, IonRow } from "@ionic/react";
+import { SOLAR_DATA_DESCRIPTION_MODAL } from "../constants";
 import "./DataCard.css";
 
-interface IDataCard {
-    iconName: string;
-    name: string;
-    value: {
-        density: number;
-        temperature: number;
-        speed: number;
-        phi: number;
-    }
-    ;
-}
-
-interface IDataCard2 {
-    iconName: string;
-    name: string;
-    value: string;
-    
-}
 
 interface Values {
     density: number;
@@ -43,24 +26,40 @@ function chooseData(name: string, values: Values) {
     }
 }
 
-function DataCard({ iconName, name, value }: any) {
+
+
+
+function DataCard({ iconName, name, value, setDataDescription, id, setIsOpen }: any) {
+    function settDataForModal(id: number) {
+        for (let i = 0; i < SOLAR_DATA_DESCRIPTION_MODAL.length; i++) {
+            if (SOLAR_DATA_DESCRIPTION_MODAL[i].id === id) {
+                setDataDescription({
+                    title: SOLAR_DATA_DESCRIPTION_MODAL[i].name,
+                    description: SOLAR_DATA_DESCRIPTION_MODAL[i].description,
+                    icon: iconName
+                })
+            }
+        }
+    }
+
     return (
-        <div className="datacard-container">
-            <IonRow className="ion-justify-content-center">
-                <img src={"/assets/icon/" + iconName} className="data-logo" />
-            </IonRow>
-            <IonCardTitle>
-                {name}
-            </IonCardTitle>
-            <IonCardContent>
-                {typeof value === 'string' ? value : chooseData(name, value)}
-                {
-                    name === "Gravity" &&
-                    <span style={{ position: "absolute", top: 3 }}>3</span>
-                }
-            </IonCardContent>
-        </div>
-    )
-}
+        <div className="datacard-container" id="open-dataModal" onClick={() => { settDataForModal(id); setIsOpen(true) }}>
+                <IonRow className="ion-justify-content-center">
+                    <img src={"/assets/icon/" + iconName} className="data-logo" />
+                </IonRow>
+                <IonCardTitle>
+                    {name}
+                </IonCardTitle>
+                <IonCardContent>
+                    {typeof value === 'string' ? value : chooseData(name, value)}
+                    {
+                        name === "Gravity" &&
+                        <span style={{ position: "absolute", top: 3 }}>3</span>
+                    }
+                </IonCardContent>
+            </div>
+        )
+    }
+
 
 export default DataCard;
