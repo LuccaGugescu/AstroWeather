@@ -1,5 +1,5 @@
 import { IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonMenu, IonMenuToggle, IonPage, IonRow, IonSplitPane, IonTitle, IonToolbar } from '@ionic/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Aurora.css';
 import { planet, sparkles, sunny } from 'ionicons/icons';
 
@@ -16,10 +16,33 @@ const pages: Page[] = [
 ];
 
 
+function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+        width,
+        height
+    };
+}
+
+function useWindowDimensions() {
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return windowDimensions;
+}
 
 const Aurora: React.FC = () => {
     const [activePage, setActivePage] = useState(pages[2].title);
- 
+    const { height, width } = useWindowDimensions();
+
     const renderMenuItems = (): JSX.Element[] => {
         return pages.map((page: Page) => (
             <IonMenuToggle key={page.title} auto-hide="false">
@@ -34,51 +57,80 @@ const Aurora: React.FC = () => {
             </IonMenuToggle>
         ));
     }
-    return (
-            <IonSplitPane contentId="aurora">
-                {/*--  the side menu  --*/}
-
-                <IonMenu contentId="aurora">
-                    <IonHeader>
-                        <IonToolbar style={{ padding: "10px 10px 10px 10px" }}>
-                            <img src="/assets/icon/astroweather.png" width="200px" />
+    return width < 800 ? (
+            <IonPage id="main">
+                <IonHeader className="hidden-lg">
+                    <IonToolbar>
+                        <IonTitle>Aurora</IonTitle>
+                    </IonToolbar>
+                </IonHeader>
+                <IonContent fullscreen>
+                    <IonHeader collapse="condense">
+                        <IonToolbar>
+                            <IonTitle size="large">Aurora</IonTitle>
                         </IonToolbar>
                     </IonHeader>
-                    <IonContent className="ion-justify-content-center">
-                        <IonList>
-                            {renderMenuItems()}
-                        </IonList>
-                    </IonContent>
-                </IonMenu>
+                    <IonTitle style={{ marginTop: 20 }}>
+                        Northern Hemisphere
+                    </IonTitle>
+                    <IonRow className="ion-justify-content-center">
+                        <img src="https://services.swpc.noaa.gov/images/animations/ovation/north/latest.jpg" style={{ width: "100%", maxWidth: 800, marginTop: 10 }} />
+                    </IonRow>
+                    <IonTitle style={{ marginTop: 20 }}>
+                        Southern Hemisphere
+                    </IonTitle>
+                    <IonRow className="ion-justify-content-center">
+                        <img src="https://services.swpc.noaa.gov/images/animations/ovation/south/latest.jpg" style={{ width: "100%", maxWidth: 800, marginTop: 60 }} />
+                    </IonRow>
+                </IonContent>
+            </IonPage>
+    )
+        :
+            (
+                <IonSplitPane contentId="main">
+                    {/*--  the side menu  --*/}
 
-                <IonPage id="aurora">
+                    <IonMenu contentId="main">
+                        <IonHeader>
+                            <IonToolbar style={{ padding: "10px 10px 10px 10px" }}>
+                                <img src="/assets/icon/astroweather.png" width="200px" />
+                            </IonToolbar>
+                        </IonHeader>
+                        <IonContent className="ion-justify-content-center">
+                            <IonList>
+                                {renderMenuItems()}
+                            </IonList>
+                        </IonContent>
+                    </IonMenu>
+
+                    <IonPage id="main">
                         <IonHeader className="hidden-lg">
                             <IonToolbar>
                                 <IonTitle>Aurora</IonTitle>
                             </IonToolbar>
                         </IonHeader>
-                    <IonContent fullscreen>
-                        <IonHeader collapse="condense">
-                            <IonToolbar>
-                                <IonTitle size="large">Aurora</IonTitle>
-                            </IonToolbar>
-                        </IonHeader>
-                        <IonTitle style={{ marginTop: 20 }}>
-                            Northern Hemisphere
-                        </IonTitle>
-                        <IonRow className="ion-justify-content-center">
-                            <img src="https://services.swpc.noaa.gov/images/animations/ovation/north/latest.jpg" style={{ width: "100%", maxWidth: 800, marginTop: 10 }} />
-                        </IonRow>
-                        <IonTitle style={{ marginTop: 20 }}>
-                            Southern Hemisphere
-                        </IonTitle>
-                        <IonRow className="ion-justify-content-center">
-                            <img src="https://services.swpc.noaa.gov/images/animations/ovation/south/latest.jpg" style={{ width: "100%", maxWidth: 800, marginTop: 60 }} />
-                        </IonRow>
-                    </IonContent>
-                </IonPage>
-            </IonSplitPane>
-    );
+                        <IonContent fullscreen>
+                            <IonHeader collapse="condense">
+                                <IonToolbar>
+                                    <IonTitle size="large">Aurora</IonTitle>
+                                </IonToolbar>
+                            </IonHeader>
+                            <IonTitle style={{ marginTop: 20 }}>
+                                Northern Hemisphere
+                            </IonTitle>
+                            <IonRow className="ion-justify-content-center">
+                                <img src="https://services.swpc.noaa.gov/images/animations/ovation/north/latest.jpg" style={{ width: "100%", maxWidth: 800, marginTop: 10 }} />
+                            </IonRow>
+                            <IonTitle style={{ marginTop: 20 }}>
+                                Southern Hemisphere
+                            </IonTitle>
+                            <IonRow className="ion-justify-content-center">
+                                <img src="https://services.swpc.noaa.gov/images/animations/ovation/south/latest.jpg" style={{ width: "100%", maxWidth: 800, marginTop: 60 }} />
+                            </IonRow>
+                        </IonContent>
+                    </IonPage>
+                </IonSplitPane>
+                )
 };
 
 export default Aurora;

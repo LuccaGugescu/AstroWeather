@@ -30,8 +30,32 @@ const pages: Page[] = [
     { title: 'Aurora', path: '/aurora', icon: sparkles }
 ];
 
+function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+        width,
+        height
+    };
+}
+
+function useWindowDimensions() {
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return windowDimensions;
+}
+
 const Sun: React.FC = () => {
     const [texture, setTexture] = useState("https://sdo.gsfc.nasa.gov/assets/img/latest/mpeg/latest_1024_0193.mp4");
+    const { height, width } = useWindowDimensions();
     const [isLoading, setIsLoading] = useState(true);
     const videoRef = useRef<HTMLVideoElement>(null);
     const [solarWindData, setSolarWindData] = useState({
@@ -153,24 +177,8 @@ const Sun: React.FC = () => {
 
 
 
-    return (
-                <IonSplitPane contentId="sun">
-                    {/*--  the side menu  --*/}
-
-                    <IonMenu contentId="sun">
-                        <IonHeader>
-                            <IonToolbar style={{ padding: "10px 10px 10px 10px" }}>
-                                <img src="/assets/icon/astroweather.png" width="200px" />
-                            </IonToolbar>
-                        </IonHeader>
-                        <IonContent className="ion-justify-content-center">
-                            <IonList>
-                                {renderMenuItems()}
-                            </IonList>
-                        </IonContent>
-                    </IonMenu>
-
-                    <IonPage id="sun">
+    return width < 800  ? (
+                    <IonPage id="main">
                         <IonHeader className="hidden-lg">
                             <IonToolbar>
                                 <IonTitle>Sun</IonTitle>
@@ -305,8 +313,161 @@ const Sun: React.FC = () => {
                             </IonGrid>
                         </IonContent>
                     </IonPage>
-                </IonSplitPane>
-    );
+    ) : 
+        (
+            <IonSplitPane contentId="main">
+                {/*--  the side menu  --*/}
+
+                <IonMenu contentId="main">
+                    <IonHeader>
+                        <IonToolbar style={{ padding: "10px 10px 10px 10px" }}>
+                            <img src="/assets/icon/astroweather.png" width="200px" />
+                        </IonToolbar>
+                    </IonHeader>
+                    <IonContent className="ion-justify-content-center">
+                        <IonList>
+                            {renderMenuItems()}
+                        </IonList>
+                    </IonContent>
+                </IonMenu>
+
+                <IonPage id="main">
+                    <IonHeader className="hidden-lg">
+                        <IonToolbar>
+                            <IonTitle>Sun</IonTitle>
+                        </IonToolbar>
+                    </IonHeader>
+                    <IonContent fullscreen>
+                        <IonHeader collapse="condense">
+                            <IonToolbar>
+                                <IonTitle size="large">Sun</IonTitle>
+                            </IonToolbar>
+                        </IonHeader>
+                        <IonCardSubtitle style={{ marginLeft: 30, marginTop: 30 }}>
+                            Frequency Length
+                        </IonCardSubtitle>
+                        <Swiper
+                            style={{ padding: "0px 50px 0px 20px", margin: "10px 0px 0px 0px" }}
+                            // install Swiper modules
+                            modules={[Navigation]}
+                            spaceBetween={10}
+                            slidesPerView={2}
+                            navigation
+                            breakpoints={{
+                                // when window width is >= 480px
+                                0: {
+                                    navigation: {
+                                        enabled: false
+                                    }
+                                },
+                                480: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 20,
+                                    navigation: {
+                                        enabled: false
+                                    }
+                                },
+                                // when window width is >= 640px
+                                640: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 40,
+                                    navigation: {
+                                        enabled: false
+                                    }
+                                },
+                                820: {
+                                    slidesPerView: 5,
+                                    spaceBetween: 40,
+                                    navigation: {
+                                        enabled: true
+                                    }
+
+                                },
+                                1022: {
+                                    slidesPerView: 4,
+                                    spaceBetween: 40,
+                                    navigation: {
+                                        enabled: true,
+
+                                    }
+                                },
+                                1400: {
+                                    slidesPerView: 6,
+                                    spaceBetween: 40,
+                                    navigation: {
+                                        enabled: true
+                                    }
+                                },
+                            }
+                            }
+
+                        >
+
+                            {
+                                textureList.map(({ image, name, link }) => {
+                                    return (
+                                        <SwiperSlide key={name}>
+                                            <SunTexture image={image} name={name} link={link} setTexture={setTexture} selectedLink={texture} setDescription={setDescription} />
+                                        </SwiperSlide>
+                                    )
+                                })
+                            }
+                        </Swiper>
+                        <IonRow className="ion-justify-content-center">
+                            {
+                                isLoading === false ? (
+                                    <div style={{ position: "relative" }}>
+                                        <video ref={videoRef} autoPlay style={{ width: "100%", maxWidth: "800px" }} key={texture} loop>
+                                            <source src={texture} type="video/mp4" />
+                                        </video>
+                                        <InfoButton />
+                                        <FreqDescription {...description} />
+                                    </div>
+                                ) :
+                                    (
+                                        <IonSkeletonText style={{ marginTop: 20, marginBottom: 20, width: "100%", maxWidth: 800, height: 500 }} animated={true}></IonSkeletonText>
+                                    )
+                            }
+
+                        </IonRow>
+
+                        <IonTitle size="large" style={{ fontSize: 32, marginLeft: 15, marginTop: 20 }}>
+                            Sun Data
+                        </IonTitle>
+                        <IonGrid className="grid-ion">
+                            <IonRow> {
+                                SUN_DATA.map(({ iconName, name, value, id }) => {
+                                    return (
+                                        <IonCol col-6 col-sm><DataCard setDataDescription={setDataDescription} id={id} iconName={iconName} name={name} value={value} setIsOpen={setIsOpen} /></IonCol>
+                                    )
+                                })
+                            }
+                            </IonRow>
+                        </IonGrid>
+                        <DataModal setIsOpen={setIsOpen} isOpen={isOpen} description={dataDescription.description} icon={dataDescription.icon} title={dataDescription.title} />
+                        <div style={{ width: "100%", height: 5, backgroundColor: "#221D1D" }}></div>
+                        <IonTitle size="large" style={{ fontSize: 32, marginLeft: 15, marginTop: 20 }}>
+                            Solar Wind
+                        </IonTitle>
+                        <IonGrid className="grid-ion">
+                            <IonRow>
+                                {
+                                    SOLAR_WIND_DATA.map(({ iconName, name, id }) => {
+                                        return !isLoadingPlasma ? (
+                                            <IonCol col-6 col-sm><DataCard setDataDescription={setDataDescription} id={id} iconName={iconName} name={name} setIsOpen={setIsOpen} value={plasmaData} key={name} /></IonCol>
+                                        ) :
+                                            (
+                                                <IonSkeletonText style={{ marginTop: 20, marginBottom: 20, width: "100%", maxWidth: 300, height: 300 }} animated={true}></IonSkeletonText>
+                                            )
+                                    })
+                                }
+                                <IonCol col-6 col-sm><CustomDataCard setIsOpen={setIsOpen} setDataDescription={setDataDescription} x={solarWindData.x} y={solarWindData.y} /></IonCol>
+                            </IonRow>
+                        </IonGrid>
+                    </IonContent>
+                </IonPage>
+            </IonSplitPane>
+        );
 };
 
 export default Sun;
