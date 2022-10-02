@@ -52,3 +52,28 @@ export const textureList = [
         link: "https://sdo.gsfc.nasa.gov/assets/img/latest/mpeg/latest_1024_1700.mp4"
     }
 ]
+
+
+export const SUN_DATA = [
+    {
+        iconName: "clock.png",
+        name: "age",
+        value: "~4.5 billion years"
+    },
+    {
+        iconName: "Radius.png",
+        name: "radius",
+        value: "~696,340 km"
+    },
+    {
+        iconName: "gravity.png",
+        name: "Gravity",
+        value: "274 m/s"
+    },
+    {
+        iconName: "star-type.png",
+        name: "Star Type",
+        value: "Yellow Dwarf"
+    }
+
+]

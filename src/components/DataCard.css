@@ -1,0 +1,16 @@
+.datacard-container {
+    border-radius: 30px;
+    background-color: #1E1D1D;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    min-width: 300px;
+    margin: 20px;
+    height: 200px;
+}
+.data-logo {
+    width: 80px;
+    padding-top: 15px;
+    padding-bottom: 30px;
+
+}

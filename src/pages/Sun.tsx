@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonMenu, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonCardSubtitle, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonMenu, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import { useEffect, useRef, useState } from 'react';
 import './Sun.css';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
@@ -10,8 +10,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { textureList } from "../constants/index";
+import { SUN_DATA, textureList } from "../constants/index";
 import { chevronBackOutline, chevronForwardOutline } from 'ionicons/icons';
+import DataCard from '../components/DataCard';
 const Sun: React.FC = () => {
     const [texture, setTexture] = useState("https://sdo.gsfc.nasa.gov/assets/img/latest/mpeg/latest_1024_0193.mp4");
     const [present, dismiss] = useIonLoading();
@@ -55,8 +56,11 @@ const Sun: React.FC = () => {
                             <IonTitle size="large">Sun</IonTitle>
                         </IonToolbar>
                     </IonHeader>
+                    <IonCardSubtitle style={{ marginLeft: 60, marginTop: 30 }}>
+                        Frequency Length
+                    </IonCardSubtitle>
                     <Swiper
-                        style={{ padding: "0px 50px 0px 50px", margin: "30px 0px 60px 0px" }}
+                        style={{ padding: "0px 50px 0px 50px", margin: "10px 0px 60px 0px" }}
                         // install Swiper modules
                         modules={[Navigation]}
                         spaceBetween={10}
@@ -97,7 +101,7 @@ const Sun: React.FC = () => {
                                 spaceBetween: 40,
                                 navigation: {
                                     enabled: true,
-                                    
+
                                 }
                             },
                             1400: {
@@ -111,7 +115,7 @@ const Sun: React.FC = () => {
                         }
 
                     >
-                       
+
                         {
                             textureList.map(({ image, name, link }) => {
                                 return (
@@ -130,8 +134,22 @@ const Sun: React.FC = () => {
                                 </video>
                             )
                         }
+
                     </IonRow>
 
+                    <IonTitle size="large" style={{fontSize: 32, marginLeft: 15} }>
+                        Sun Data
+                    </IonTitle>
+                    <IonGrid>
+                        <IonRow> {
+                            SUN_DATA.map(({ iconName, name, value }) => {
+                                return (
+                                    <IonCol col-6 col-sm><DataCard iconName={iconName} name={name} value={value } /></IonCol>
+                                )
+                            })
+                        }
+                        </IonRow>
+                    </IonGrid>
                 </IonContent>
             </IonPage>
         </>

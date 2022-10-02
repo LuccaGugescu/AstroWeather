@@ -62,7 +62,6 @@ const App: React.FC = () => {
                         </Route>
                     </IonRouterOutlet>
                     <IonTabBar slot="bottom" className="ion-hide-md-up">
-
                         <IonTabButton tab="vr" href="/vr">
                             <IonIcon icon={planet} />
                             <IonLabel>VR</IonLabel>
