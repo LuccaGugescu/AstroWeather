@@ -65,11 +65,7 @@ const Learn: React.FC = () => {
                                 </IonToolbar>
                             </IonHeader>
                             <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }} >
-                                <video width="100%" style={{ maxWidth: 1000, marginTop: "auto", marginBottom:"auto" }} controls>
-                                <source src="/assets/video/Space Weather and Earths Aurora.mp4" type="video/mp4" />
-                                
-                                    Your browser does not support the video tag.
-                                </video>
+                                <iframe width="100%" style={{ maxWidth: 1000, minHeight: 500, marginTop: "auto", marginBottom: "auto" }} src="https://www.youtube.com/embed/HJfy8acFaOg" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                             </div>
                         </IonContent>
                     </IonPage>
