@@ -27,7 +27,7 @@ interface Page {
 }
 
 const pages: Page[] = [
-    { title: 'Learn', path: '/learn', icon: planet },
+    { title: 'VR', path: '/vr', icon: planet },
     { title: 'Sun', path: '/sun', icon: sunny },
     { title: 'Aurora', path: '/aurora', icon: sparkles }
 ];
@@ -277,7 +277,7 @@ const Sun: React.FC = () => {
                             <IonTitle size="large" style={{ fontSize: 32, marginLeft: 15, marginTop: 20 }}>
                                 Sun Data
                             </IonTitle>
-                            <IonGrid className="grid-ion">
+                            <IonGrid>
                                 <IonRow> {
                                     SUN_DATA.map(({ iconName, name, value, id }) => {
                                         return (
@@ -292,7 +292,7 @@ const Sun: React.FC = () => {
                             <IonTitle size="large" style={{ fontSize: 32, marginLeft: 15, marginTop: 20 }}>
                                 Solar Wind
                             </IonTitle>
-                            <IonGrid className="grid-ion">
+                            <IonGrid>
                                 <IonRow>
                                     {
                                         SOLAR_WIND_DATA.map(({ iconName, name, id }) => {

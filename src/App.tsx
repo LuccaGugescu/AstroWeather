@@ -30,10 +30,10 @@ import '@ionic/react/css/display.css';
 import "./App.css";
 /* Theme variables */
 import './theme/variables.css';
+import Vr from './pages/Vr';
 import Sun from './pages/Sun';
 import Aurora from './pages/Aurora';
 import { useEffect } from 'react';
-import Learn from './pages/Learn';
 
 setupIonicReact();
 
@@ -51,8 +51,8 @@ const App: React.FC = () => {
                         <Route exact path="/sun">
                             <Sun />
                         </Route>
-                        <Route exact path="/learn">
-                            <Learn />
+                        <Route exact path="/vr">
+                            <Vr />
                         </Route>
                         <Route path="/aurora">
                             <Aurora />
@@ -62,9 +62,9 @@ const App: React.FC = () => {
                         </Route>
                     </IonRouterOutlet>
                     <IonTabBar slot="bottom" className="ion-hide-md-up">
-                        <IonTabButton tab="learn" href="/learn">
+                        <IonTabButton tab="vr" href="/vr">
                             <IonIcon icon={planet} />
-                            <IonLabel>Learn</IonLabel>
+                            <IonLabel>VR</IonLabel>
                         </IonTabButton>
                         <IonTabButton tab="sun" href="/sun">
                             <IonIcon icon={sunny} />

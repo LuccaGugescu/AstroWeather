@@ -1,5 +1,5 @@
 import { IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonMenu, IonMenuToggle, IonPage, IonRow, IonSplitPane, IonTitle, IonToolbar } from '@ionic/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Aurora.css';
 import { planet, sparkles, sunny } from 'ionicons/icons';
 
@@ -10,10 +10,11 @@ interface Page {
 }
 
 const pages: Page[] = [
-    { title: 'Learn', path: '/learn', icon: planet },
+    { title: 'VR', path: '/vr', icon: planet },
     { title: 'Sun', path: '/sun', icon: sunny },
     { title: 'Aurora', path: '/aurora', icon: sparkles }
 ];
+
 
 
 
