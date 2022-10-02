@@ -13,6 +13,8 @@ import 'swiper/css/scrollbar';
 import { SUN_DATA, textureList } from "../constants/index";
 import { chevronBackOutline, chevronForwardOutline } from 'ionicons/icons';
 import DataCard from '../components/DataCard';
+import InfoButton from '../components/InfoButton';
+import FreqDescription from '../components/FreqDescription';
 const Sun: React.FC = () => {
     const [texture, setTexture] = useState("https://sdo.gsfc.nasa.gov/assets/img/latest/mpeg/latest_1024_0193.mp4");
     const [present, dismiss] = useIonLoading();
@@ -21,16 +23,37 @@ const Sun: React.FC = () => {
 
     useEffect(() => {
         videoRef.current?.load();
-    }, [texture]);
-    useEffect(() => {
+        setIsLoading(true);
         const interval = setInterval(() => {
             setIsLoading(false);
         }, 3000);
         return () => {
             clearInterval(interval);
-        }; 
-    }, [])
-
+        };
+    }, [texture]);
+    //useEffect(() => {
+    //    fetch("https://api.example.com/items")
+    //        .then(res => res.json())
+    //        .then(
+    //            (result) => {
+    //                setIsLoaded(true);
+    //                setItems(result);
+    //            },
+    //            // Note: it's important to handle errors here
+    //            // instead of a catch() block so that we don't swallow
+    //            // exceptions from actual bugs in components.
+    //            (error) => {
+    //                setIsLoaded(true);
+    //                setError(error);
+    //            }
+    //        )
+    //    const interval = setInterval(() => {
+    //        setIsLoading(false);
+    //    }, 3000);
+    //    return () => {
+    //        clearInterval(interval);
+    //    };
+    //}, [])
 
     return (
         <>
@@ -121,7 +144,7 @@ const Sun: React.FC = () => {
                                     textureList.map(({ image, name, link }) => {
                                         return (
                                             <SwiperSlide key={name}>
-                                                <SunTexture image={image} name={name} link={link} setTexture={setTexture} present={present} selectedLink={texture} />
+                                                <SunTexture image={image} name={name} link={link} setTexture={setTexture} selectedLink={texture} />
                                             </SwiperSlide>
                                         )
                                     })
@@ -130,12 +153,16 @@ const Sun: React.FC = () => {
                             <IonRow className="ion-justify-content-center">
                                 {
                                     isLoading === false ? (
-                                        <video ref={videoRef} autoPlay style={{ width: "100%", maxWidth: "800px" }} key={texture} loop>
-                                            <source src={texture} type="video/mp4" />
-                                        </video>
+                                        <div style={{ position: "relative" }}>
+                                            <video ref={videoRef} autoPlay style={{ width: "100%", maxWidth: "800px" }} key={texture} loop>
+                                                <source src={texture} type="video/mp4" />
+                                            </video>
+                                            <InfoButton />
+                                            <FreqDescription />
+                                        </div>
                                     ) :
                                         (
-                                                <IonSkeletonText style={{ marginTop: 20, marginBottom: 20, width: "100%", maxWidth: 800, height: 500 }} animated={true}></IonSkeletonText>
+                                            <IonSkeletonText style={{ marginTop: 20, marginBottom: 20, width: "100%", maxWidth: 800, height: 500 }} animated={true}></IonSkeletonText>
                                         )
                                 }
 
