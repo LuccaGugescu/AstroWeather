@@ -77,3 +77,45 @@ export const SUN_DATA = [
     }
 
 ]
+
+function findModalBasedOnTexture(name: string) {
+    let result = {};
+
+    switch (name) {
+        case "AIA_094_A":
+            result = {
+                title: "AIA 094 A",
+                waveLight: 94,
+                object: "Dice",
+                temperature: 6000000,
+                color: "Green",
+                height: 0.94,
+                image: "dice.png"
+            }
+            break;
+        case "AIA_131_A ":
+            result = {
+                title: "AIA 131 A",
+                waveLight: 131,
+                object: "Pea",
+                temperature: 10000000,
+                color: "Teal",
+                height: 1.31,
+                image: "eclipse.png"
+            }
+            break;
+        case "AIA_171_A":
+            result = {
+                title: "AIA 171 A",
+                waveLight: 171,
+                object: "Dime",
+                temperature: 600000,
+                color: "Gold",
+                height: 1.71,
+                image: "coin.png"
+            }
+            break;
+
+    }
+    return result;
+}
