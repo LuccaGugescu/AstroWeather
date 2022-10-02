@@ -8,3 +8,11 @@ ion-loading.custom-loading {
     padding-top: 200px;
     
 }
+
+@media only screen and (min-width: 600px) {
+    .grid-ion {
+        padding-left:200px;
+        padding-right: 200px;
+    } 
+
+}
