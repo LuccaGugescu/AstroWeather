@@ -11,8 +11,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { SOLAR_WIND_DATA, SUN_DATA, textureList } from "../constants/index";
-import { chevronBackOutline, chevronForwardOutline } from 'ionicons/icons';
-import { findModalBasedOnTexture } from "../constants/index";
 import DataCard from '../components/DataCard';
 import InfoButton from '../components/InfoButton';
 import FreqDescription from '../components/FreqDescription';
@@ -45,7 +43,7 @@ const Sun: React.FC = () => {
     const [dataDescription, setDataDescription] = useState({
         title: "rea",
         icon: "bz.png",
-        description: "flkdsjaòflkdsajlòfdas"
+        description: ""
     });
 
     const [description, setDescription] = useState({
@@ -156,12 +154,10 @@ const Sun: React.FC = () => {
 
 
     return (
-        <>
-            <IonContent>
-                <IonSplitPane contentId="main">
+                <IonSplitPane contentId="sun">
                     {/*--  the side menu  --*/}
 
-                    <IonMenu contentId="main">
+                    <IonMenu contentId="sun">
                         <IonHeader>
                             <IonToolbar style={{ padding: "10px 10px 10px 10px" }}>
                                 <img src="/assets/icon/astroweather.png" width="200px" />
@@ -174,7 +170,7 @@ const Sun: React.FC = () => {
                         </IonContent>
                     </IonMenu>
 
-                    <IonPage id="main">
+                    <IonPage id="sun">
                         <IonHeader className="hidden-lg">
                             <IonToolbar>
                                 <IonTitle>Sun</IonTitle>
@@ -310,8 +306,6 @@ const Sun: React.FC = () => {
                         </IonContent>
                     </IonPage>
                 </IonSplitPane>
-            </IonContent>
-        </>
     );
 };
 

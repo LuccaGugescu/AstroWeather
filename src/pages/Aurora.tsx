@@ -35,12 +35,10 @@ const Aurora: React.FC = () => {
         ));
     }
     return (
-        <>
-            <IonContent>
-            <IonSplitPane contentId="main">
+            <IonSplitPane contentId="aurora">
                 {/*--  the side menu  --*/}
 
-                <IonMenu contentId="maina">
+                <IonMenu contentId="aurora">
                     <IonHeader>
                         <IonToolbar style={{ padding: "10px 10px 10px 10px" }}>
                             <img src="/assets/icon/astroweather.png" width="200px" />
@@ -53,7 +51,7 @@ const Aurora: React.FC = () => {
                     </IonContent>
                 </IonMenu>
 
-                <IonPage id="main">
+                <IonPage id="aurora">
                         <IonHeader className="hidden-lg">
                             <IonToolbar>
                                 <IonTitle>Aurora</IonTitle>
@@ -80,8 +78,6 @@ const Aurora: React.FC = () => {
                     </IonContent>
                 </IonPage>
             </IonSplitPane>
-        </IonContent>
-        </>
     );
 };
 

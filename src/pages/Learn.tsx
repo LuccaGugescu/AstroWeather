@@ -34,12 +34,10 @@ const Learn: React.FC = () => {
         ));
     }
     return (
-        <>
-            <IonContent>
-                <IonSplitPane contentId="main">
+                <IonSplitPane contentId="learn">
                     {/*--  the side menu  --*/}
 
-                    <IonMenu contentId="maina">
+                    <IonMenu contentId="learn">
                         <IonHeader>
                             <IonToolbar style={{ padding: "10px 10px 10px 10px" }}>
                                 <img src="/assets/icon/astroweather.png" width="200px" />
@@ -52,7 +50,7 @@ const Learn: React.FC = () => {
                         </IonContent>
                     </IonMenu>
 
-                    <IonPage id="main">
+                    <IonPage id="learn">
                         <IonHeader>
                             <IonToolbar>
                                 <IonTitle>Learn</IonTitle>
@@ -70,8 +68,6 @@ const Learn: React.FC = () => {
                         </IonContent>
                     </IonPage>
                 </IonSplitPane>
-            </IonContent>
-        </>
     );
 };
 
