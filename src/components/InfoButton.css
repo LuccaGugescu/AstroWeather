@@ -1,0 +1,21 @@
+.infoButtonContainer {
+    border-radius: 100%;
+    background-color: #1E1D1D;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 4;
+    right: 30px;
+    top: 30px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .infoButtonContainer {
+        width: 35px;
+        height: 35px;
+    }
+}
