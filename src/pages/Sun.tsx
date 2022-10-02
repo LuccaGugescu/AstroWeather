@@ -10,16 +10,48 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { SUN_DATA, textureList } from "../constants/index";
+import { SOLAR_WIND_DATA, SUN_DATA, textureList } from "../constants/index";
 import { chevronBackOutline, chevronForwardOutline } from 'ionicons/icons';
+import { findModalBasedOnTexture } from "../constants/index";
 import DataCard from '../components/DataCard';
 import InfoButton from '../components/InfoButton';
 import FreqDescription from '../components/FreqDescription';
+
+
+
+
+
+
+
+
+
 const Sun: React.FC = () => {
     const [texture, setTexture] = useState("https://sdo.gsfc.nasa.gov/assets/img/latest/mpeg/latest_1024_0193.mp4");
-    const [present, dismiss] = useIonLoading();
     const [isLoading, setIsLoading] = useState(true);
     const videoRef = useRef<HTMLVideoElement>(null);
+    const [solarWindData, setSolarWindData] = useState({
+        });
+    const [loadSolarData, setLoadSolarData] = useState(true);
+    const [description, setDescription] = useState({
+        title: "AIA 193 A",
+        waveLight: 193,
+        object: "Sharpener",
+        temperature: 1000000,
+        color: "Light brown",
+        height: 1.93,
+        image: "sharper.png"
+    });
+    const [plasmaData, setPlasmaData] = useState({
+        density: 0,
+        temperature: 0,
+        speed: 0
+    });
+    const [isLoadingPlasma, setIsLoadingPlasma] = useState(true);
+
+
+
+
+
 
     useEffect(() => {
         videoRef.current?.load();
@@ -31,29 +63,55 @@ const Sun: React.FC = () => {
             clearInterval(interval);
         };
     }, [texture]);
-    //useEffect(() => {
-    //    fetch("https://api.example.com/items")
-    //        .then(res => res.json())
-    //        .then(
-    //            (result) => {
-    //                setIsLoaded(true);
-    //                setItems(result);
-    //            },
-    //            // Note: it's important to handle errors here
-    //            // instead of a catch() block so that we don't swallow
-    //            // exceptions from actual bugs in components.
-    //            (error) => {
-    //                setIsLoaded(true);
-    //                setError(error);
-    //            }
-    //        )
-    //    const interval = setInterval(() => {
-    //        setIsLoading(false);
-    //    }, 3000);
-    //    return () => {
-    //        clearInterval(interval);
-    //    };
-    //}, [])
+
+
+
+    useEffect(() => {
+        fetch("https://services.swpc.noaa.gov/products/solar-wind/mag-5-minute.json")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setSolarWindData({
+                        bx: result[1][1],
+                        by: result[1][2]
+                    });
+                    setLoadSolarData(false);
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    setLoadSolarData(false);
+                    alert(error);
+                }
+            )
+        fetch("https://services.swpc.noaa.gov/products/solar-wind/plasma-5-minute.json")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    setPlasmaData({
+                        density: result[1][1],
+                        speed: result[1][2],
+                        temperature: result[1][3]
+                    });
+                    setIsLoadingPlasma(false);
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    setIsLoadingPlasma(false);
+                    alert(error);
+                }
+            )
+
+        const interval = setInterval(() => {
+            setIsLoading(false);
+        }, 3000);
+        return () => {
+            clearInterval(interval);
+        };
+    }, [])
 
     return (
         <>
@@ -144,7 +202,7 @@ const Sun: React.FC = () => {
                                     textureList.map(({ image, name, link }) => {
                                         return (
                                             <SwiperSlide key={name}>
-                                                <SunTexture image={image} name={name} link={link} setTexture={setTexture} selectedLink={texture} />
+                                                <SunTexture image={image} name={name} link={link} setTexture={setTexture} selectedLink={texture} setDescription={setDescription}/>
                                             </SwiperSlide>
                                         )
                                     })
@@ -158,7 +216,7 @@ const Sun: React.FC = () => {
                                                 <source src={texture} type="video/mp4" />
                                             </video>
                                             <InfoButton />
-                                            {/*<FreqDescription />*/}
+                                            <FreqDescription {...description} />
                                         </div>
                                     ) :
                                         (
@@ -179,6 +237,24 @@ const Sun: React.FC = () => {
                                         )
                                     })
                                 }
+                                </IonRow>
+                            </IonGrid>
+                            <div style={{ width: "100%", height: 5, backgroundColor: "#221D1D" }}></div>
+                            <IonTitle size="large" style={{ fontSize: 32, marginLeft: 15, marginTop: 20 }}>
+                                Solar Wind
+                            </IonTitle>
+                            <IonGrid>
+                                <IonRow>
+                                    {
+                                        SOLAR_WIND_DATA.map(({ iconName, name }) => {
+                                            return !isLoadingPlasma ? (
+                                                <IonCol col-6 col-sm><DataCard iconName={iconName} name={name} value={plasmaData} /></IonCol>
+                                            ) :
+                                                (
+                                                    <IonSkeletonText style={{ marginTop: 20, marginBottom: 20, width: "100%", maxWidth: 300, height: 300 }} animated={true}></IonSkeletonText>
+                                                )
+                                        })
+                                    }
                                 </IonRow>
                             </IonGrid>
                         </IonContent>

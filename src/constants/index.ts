@@ -57,12 +57,12 @@ export const textureList = [
 export const SUN_DATA = [
     {
         iconName: "clock.png",
-        name: "age",
+        name: "Age",
         value: "~4.5 billion years"
     },
     {
         iconName: "Radius.png",
-        name: "radius",
+        name: "Radius",
         value: "~696,340 km"
     },
     {
@@ -78,114 +78,135 @@ export const SUN_DATA = [
 
 ]
 
-function findModalBasedOnTexture(name: string) {
+export function findModalBasedOnTexture(name: string) {
     let result = {};
 
     switch (name) {
-                case "AIA_094_A":
-                result = {
-                    title: "AIA 094 A",
-                    waveLight: 94,
-                    object: "Dice",
-                    temperature: 6000000,
-                    color: "Green",
-                    height: 0.94,
-                    image: "dice.png"
-                }
-                break;
-                case "AIA_131_A ":
-                result = {
-                    title: "AIA 131 A",
-                    waveLight: 131,
-                    object: "Pea",
-                    temperature: 10000000,
-                    color: "Teal",
-                    height: 1.31,
-                    image: "eclipse.png"
-                }
-                break;
-                case "AIA_171_A":
-                result = {
-                    title: "AIA 171 A",
-                    waveLight: 171,
-                    object: "Dime",
-                    temperature: 600000,
-                    color: "Gold",
-                    height: 1.71,
-                    image: "coin.png"
-                }
-                break;
-                case "AIA_193_A":
-                result = {
-                    title: "AIA 193 A",
-                    waveLight: 193,
-                    object: "Sharpener",
-                    temperature: 1000000,
-                    color: "Light brown",
-                    height: 1.93,
-                    image: "sharper.png"
-                }
-                break;
 
-                case "AIA_211_A":
-                result = {
-                    title: "AIA 211 A",
-                    waveLight: 211,
-                    object: "Peanut",
-                    temperature: 2000000,
-                    color: "Purple",
-                    height: 2.11,
-                    image: "peanut.png"
-                }
-                break;
+        case "AIA_094_A":
+            result = {
+                title: "AIA 094 A",
+                waveLight: 94,
+                object: "Dice",
+                temperature: 6000000,
+                color: "Green",
+                height: 0.94,
+                image: "dice.png"
+            }
+            break;
+        case "AIA_131_A":
+            result = {
+                title: "AIA 131 A",
+                waveLight: 131,
+                object: "Pea",
+                temperature: 10000000,
+                color: "Teal",
+                height: 1.31,
+                image: "eclipse.png"
+            }
+            break;
+        case "AIA_171_A":
+            result = {
+                title: "AIA 171 A",
+                waveLight: 171,
+                object: "Dime",
+                temperature: 600000,
+                color: "Gold",
+                height: 1.71,
+                image: "coin.png"
+            }
+            break;
+        case "AIA_193_A":
+            result = {
+                title: "AIA 193 A",
+                waveLight: 193,
+                object: "Sharpener",
+                temperature: 1000000,
+                color: "Light brown",
+                height: 1.93,
+                image: "sharper.png"
+            }
+            break;
 
-                case "AIA_304_A":
-                result = {
-                    title: "AIA 304 A",
-                    waveLight: 304,
-                    object: "Clip",
-                    temperature: 50000,
-                    color: "Red",
-                    height: 3.04,
-                    image: "clip.png"
-                }
-                break;
+        case "AIA_211_A":
+            result = {
+                title: "AIA 211 A",
+                waveLight: 211,
+                object: "Peanut",
+                temperature: 2000000,
+                color: "Purple",
+                height: 2.11,
+                image: "peanut.png"
+            }
+            break;
 
-                case "AIA_335_A4":
-                result = {
-                    title: "AIA 335 A",
-                    waveLight: 335,
-                    object: "Clip",
-                    temperature: 600000,
-                    color: "Blue",
-                    height: 3.35,
-                    image: "clip.png"
-                }
-                break;
+        case "AIA_304_A":
+            result = {
+                title: "AIA 304 A",
+                waveLight: 304,
+                object: "Clip",
+                temperature: 50000,
+                color: "Red",
+                height: 3.04,
+                image: "clip.png"
+            }
+            break;
 
-                case "AIA_1600_A":
-                result = {
-                    title: "AIA 1600 A",
-                    waveLight: 1600,
-                    object: "Xiaomi Redmi 10",
-                    temperature: 10000,
-                    color: "Dark yellow",
-                    height: 16,
-                    image: "iphone.png"
-                }
-                break;
+        case "AIA_335_A":
+            result = {
+                title: "AIA 335 A",
+                waveLight: 335,
+                object: "Clip",
+                temperature: 600000,
+                color: "Blue",
+                height: 3.35,
+                image: "clip.png"
+            }
+            break;
 
-                case "AIA_1700_A":
-                result = {
-                    title: "AIA 1700 A",
-                    waveLight: 1700,
-                    object: "Bowling Pin",
-                    temperature: 4500,
-                    color: "Grainy pink",
-                    height: 17,
-                    image: "bowlingPin.png"
-                }
-                break;
+        case "AIA_1600_A":
+            result = {
+                title: "AIA 1600 A",
+                waveLight: 1600,
+                object: "Xiaomi Redmi 10",
+                temperature: 10000,
+                color: "Dark yellow",
+                height: 16,
+                image: "iphone.png"
+            }
+            break;
+
+        case "AIA_1700_A":
+            result = {
+                title: "AIA 1700 A",
+                waveLight: 1700,
+                object: "Bowling Pin",
+                temperature: 4500,
+                color: "Grainy pink",
+                height: 17,
+                image: "bowlingPin.png"
+            }
+            break;
     }
     return result;
 }
+
+
+export const SOLAR_WIND_DATA = [
+    {
+        iconName: "density.png",
+        name: "Density"
+    },
+    {
+        iconName: "wind.png",
+        name: "Speed"
+    },
+    {
+        iconName: "temperature.png",
+        name: "Temperature"
+    },
+    {
+        iconName: "phi.png",
+        name: "Phi"
+    }
+]
