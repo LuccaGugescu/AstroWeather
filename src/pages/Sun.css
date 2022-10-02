@@ -3,3 +3,8 @@ ion-loading.custom-loading {
     --spinner-color: #1c6dff;
     color: #1c6dff;
 }
+
+.sidebar {
+    height: 100%;
+    background-color: red;
+}
