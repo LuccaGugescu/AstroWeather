@@ -1,5 +1,5 @@
 # AstroWeather-frontEnd
-Nasa App challenge hackhathon
+Nasa App challenge hackathon
 Challenge: Creative Data Display with the Parker Solar Probe
 # Description:
 Our application brings NASA’s data in front of the people’s eyes. We created a simple app that help normal people to understand how space weather works, and simplify the data given by NASA that allows our infrastructure to easily gain access to solar wind temperature, speed, strength and polar angle of the magnetic field and also Aurora prediction.
