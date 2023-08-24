@@ -11,3 +11,7 @@ Our application brings NASA’s data in front of the people’s eyes. We created
 ![image](https://user-images.githubusercontent.com/61294264/233973843-d7493bda-0d6c-47b7-b9e9-5069b2a90195.png)
 ![image](https://user-images.githubusercontent.com/61294264/233974052-d949effb-c3da-441b-a261-937c4b172c76.png)
 
+# Stack:
+- React
+- Capacitor
+- Ionic
