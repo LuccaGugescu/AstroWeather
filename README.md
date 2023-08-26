@@ -1,4 +1,4 @@
-# AstroWeather-frontEnd
+# AstroWeather
 Nasa App challenge hackathon
 Challenge: Creative Data Display with the Parker Solar Probe
 # Description:
